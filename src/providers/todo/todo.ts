@@ -6,7 +6,7 @@ export class TodoProvider {
 
   private todos = []
 
-  constructor(public http: HttpClient) {
+  constructor() {
     console.log('Hello TodoProvider Provider');
   }
 

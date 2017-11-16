@@ -13,15 +13,15 @@ export class HomePage {
   public reorderIsEnabled = false;
 
   constructor (
+    private todoProvider: TodoProvider,
     public navCtrl: NavController, 
-    private alertCtrl: AlertController,
-    private todoProvider: TodoProvider
+    private alertCtrl: AlertController
   ) { 
       this.todos = this.todoProvider.getTodos ();
   }
 
   toggleReorder () {
-    this.reorderIsEnabled = !this.reorderIsEnabled
+    this.reorderIsEnabled = !this.reorderIsEnabled;
   }
 
   itemReordered ($event) {
