@@ -1,3 +1,4 @@
+import { ArchivedTodosPage } from './../archived-todos/archived-todos';
 import { TodoProvider } from './../../providers/todo/todo';
 import { Component } from '@angular/core';
 import { NavController, reorderArray } from 'ionic-angular';
@@ -26,6 +27,14 @@ export class HomePage {
 
   itemReordered ($event) {
     reorderArray (this.todos, $event)
+  }
+
+  goToArchivePage () {
+    this.navCtrl.push (ArchivedTodosPage)
+  }
+
+  archiveTodo (todoIndex) {
+    this.todoProvider.archiveTodo (todoIndex)
   }
 
   openTodoAlert () {
