@@ -8,6 +8,6 @@ import { ArchivedTodosPage } from './archived-todos';
   ],
   imports: [
     IonicPageModule.forChild(ArchivedTodosPage),
-  ],
+  ]
 })
 export class ArchivedTodosPageModule {}

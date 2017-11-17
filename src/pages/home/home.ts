@@ -1,7 +1,7 @@
 import { ArchivedTodosPage } from './../archived-todos/archived-todos';
 import { TodoProvider } from './../../providers/todo/todo';
 import { Component } from '@angular/core';
-import { NavController, reorderArray } from 'ionic-angular';
+import { NavController, reorderArray, ToastController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 @Component({
@@ -11,12 +11,14 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 export class HomePage {
 
   public todos = []
-  public reorderIsEnabled = false;
+  public reorderIsEnabled = false
+  public archivedTodosPage = ArchivedTodosPage
 
   constructor (
     private todoProvider: TodoProvider,
     public navCtrl: NavController, 
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private toastCtrl: ToastController
   ) { 
       this.todos = this.todoProvider.getTodos ();
   }
@@ -57,6 +59,16 @@ export class HomePage {
             let todoText;
             todoText = inputData.addTodoInput;
             this.todoProvider.addTodo (todoText);
+
+            addTodoAlert.onDidDismiss (() => {
+              let addTodoToast = this.toastCtrl.create ({
+                message: "Todo added succesfully!",
+                position: "bottom",
+                duration: 2000,
+                showCloseButton: true
+              });
+              addTodoToast.present ()
+            });
           }
         }
       ]
@@ -64,4 +76,41 @@ export class HomePage {
     addTodoAlert.present()
   }
   
+  editTodo (todoIndex) {
+    let editTodoAlert = this.alertCtrl.create ({
+      title: "Edit Todo",
+      message: "Edit this todo with a new todo",
+      inputs: [
+        {
+          type: "text",
+          name: "editTodoInput",
+          value: this.todos[todoIndex]
+        }
+      ],
+      buttons: [
+        {
+          text: "Cancel"
+        },
+        {
+          text: "Edit",
+          handler: (inputData) => {
+            let todoText;
+            todoText = inputData.editTodoInput;
+            this.todoProvider.editTodo (todoText, todoIndex);
+
+            editTodoAlert.onDidDismiss (() => {
+              let editTodoToast = this.toastCtrl.create ({
+                message: "Updated successfully!",
+                duration: 2000,
+                position: "bottom",
+                showCloseButton: true
+              })
+              editTodoToast.present ()
+            })
+          }
+        }
+      ]
+    })
+    editTodoAlert.present ()
+  }
 }

@@ -28,4 +28,8 @@ export class TodoProvider {
   addTodo (todo) {
     return this.todos.push (todo);
   }
+
+  editTodo (todo, todoIndex) {
+    this.todos[todoIndex] = todo
+  }
 }
