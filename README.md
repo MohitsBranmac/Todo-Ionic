@@ -34,4 +34,4 @@ The above command will fire the dev server and serve the virtual app and templat
 
 For further information, visit the [official documentation](https://ionicframework.com/getting-started/) of ionic cli and Ionic.
 
-Clone the project and fire the dev server with `ionic lab`. Happy Coding! :v: :raised-hands:
+Clone the project and fire the dev server with `ionic lab`. Happy Coding! :v:
